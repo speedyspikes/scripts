@@ -6,7 +6,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetKeyDelay, .01
 
-author := "TJ Law"
+author := "SpeedySpikes"
 last_updated := "5/23/2024"
 
 /*

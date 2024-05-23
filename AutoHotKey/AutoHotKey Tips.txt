@@ -10,4 +10,4 @@ The most recent program started will take priority of running when a hotkey is p
 
 To view AutoHotKey programming documentation, open the AutoHotKey app.
 
-In all scripts made by TJ Law, you can press Alt+? to view the help menu for that script, and F8 is the escape key.
+In all scripts made by SpeedySpikes, you can press Alt+? to view the help menu for that script, and F8 is the escape key.
