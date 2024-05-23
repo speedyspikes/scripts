@@ -1,0 +1,13 @@
+Some beginner tips for using AutoHotKey script:
+
+To start the program, double click on the script file.
+There will be a green H icon in the program icons in the bottom right of the taskbar.
+If you hover over the icon, you will see the name of the script that is running.
+Right click the icon to manage the script.
+To edit the script, go to the file location, right click, open with Visual Studio Code, Notepad, or another code editor program.
+There can be multiple scripts running at the same time, so be careful if they use the same hotkeys. 
+The most recent program started will take priority of running when a hotkey is pressed.
+
+To view AutoHotKey programming documentation, open the AutoHotKey app.
+
+In all scripts made by TJ Law, you can press Alt+? to view the help menu for that script, and F8 is the escape key.
