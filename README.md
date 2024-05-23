@@ -1,2 +1,2 @@
 # scripts
-These are my automations that I've made for work and home.
+These are mainly automations that I've made for work and home.
