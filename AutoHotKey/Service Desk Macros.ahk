@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetKeyDelay, .01
 
 author := "SpeedySpikes"
-last_updated := "5/23/2024"
+last_updated := "6/25/2024"
 
 /*
 This is an AutoHotKey automation. This is not a direct API to anything. It uses
@@ -225,28 +225,28 @@ return
     Send, c
     InputBox, jabra, Jabra, Jabra Number:
     Send, {Tab}{Tab}{Tab}
-    Sleep, 200
+    Sleep, 400
     Send, Other
-    Sleep, 100
+    Sleep, 200
     Send, {Enter}
     Sleep, 500
     Send, {Tab}{Tab}
     Send, Jabra %jabra%
-    Sleep, 200
+    Sleep, 1000
     loop, 16
     {
         Send, {Tab}
     }
     Send, Please return Jabra to room 405 when meeting is over.
-    Sleep, 200
+    Sleep, 500
     loop, 5
     {
         Send, {Tab}
     }
-    Sleep, 300
+    Sleep, 500
     Send, Jabra
     Send, {Tab}
-    Sleep, 300
+    Sleep, 500
     Send, Trivial
     Send, {Tab}{Tab}{Tab}
     Send, Default
@@ -472,12 +472,12 @@ GoHire: ; This Go button will continue the new hire automation.
     name := firstName . " " . lastName
     emailAddress := firstName . "." . lastName . "@byu.edu"
     StringLower, emailAddress, emailAddress
-    rights := "*Working on:*`n`n"
     errors := ""
     emailCheck := 1
     browser := ""
-
-
+    
+    
+    rights := "*Working on:*`n`n"
     ; Build the list of actions needed and copy to clipboard.
         if (forms) {
             rights .= "* Active Forms`n"
@@ -1293,14 +1293,16 @@ return
     gui, GuiName:New,,Termination
     gui, Add, Text,, Paste netIDs for termination, separated by lines:
     gui, Add, Edit, vnetIDs w150 r10,
-    gui, Add, Text,, Use spreadsheet to determine what needs to`nbe processed:
+    gui, Add, Text,, First Last name, if only one termination:
+    gui, Add, Edit, vname w150,
     ; gui, Add, Checkbox, checked0 vform, Termination Form
     gui, Add, Checkbox, checked1 vADRights, AD Rights
     gui, Add, Checkbox, checked1 vorion, Orion
     gui, Add, Checkbox, checked1 vorionTest, Orion Test
-    gui, Add, Checkbox, checked0 vfsy, FSY Orion
+    gui, Add, Checkbox, checked1 vfsy, FSY Orion
     gui, Add, Checkbox, checked1 vgro, CRM/Gro
     gui, Add, Checkbox, checked1 vteamwork, Teamwork
+    gui, Add, Checkbox, checked1 vcvent, CVENT
     gui, Add, Checkbox, checked0 vworkstation, Workstation (Full Time)
     gui, Add, Checkbox, checked0 vemail, Email (Students)
     gui, Add, Checkbox, checked1 vmasterCourses, Master Courses
@@ -1315,9 +1317,58 @@ return
 GoTermination: ; Continue Termination
     gui, submit
 
-    name := ""
+    ;name := ""
     errors := ""
     browser := ""
+
+    rights := "" ;"*Working on:*`n`n"
+
+
+    ; Build the list of actions needed and copy to clipboard.
+        if (ADRights) {
+            rights .= "AD Rights`n"
+        }
+        if (orion) {
+            rights .= "Orion`n"
+        }
+        if (orionTest) {
+            rights .= "Orion Test`n"
+        }
+        if (fsy) {
+            rights .= "FSY Orion`n"
+        }
+        if (gro) {
+            rights .= "CRM/Gro`n"
+        }
+        if (teamwork) {
+            rights .= "Teamwork`n"
+        }
+        if (teamwork) {
+            rights .= "CVENT`n"
+        }
+        if (workstation) {
+            rights .= "Email`n"
+        }
+        if (email) {
+            rights .= "Email`n"
+        }
+        if (masterCourses) {
+            rights .= "Master Courses`n"
+        }
+        if (doors) {
+            rights .= "Doors"
+        }
+        ; rights .= "`n*Rights added:*`n"
+    clipboard := rights
+
+    if (!test) {
+        MsgBox, 4096, Termination Ticket, 
+        ( LTrim
+        The termination steps have been copied to the clipboard. 
+
+        Please go into the termination ticket and paste the list.
+        )
+    }
 
     Loop, parse, netIDs, `n
     {
@@ -1391,7 +1442,7 @@ GoTermination: ; Continue Termination
                 ( LTrim
                 Name: %name%
                 Press "Terminate".
-                Sign off for "AD Rights & Email Groups" on the form.
+                Mark off "AD Rights" on the ticket.
                 Press "OK" when finished.
                 )
                 IfMsgBox Cancel 
@@ -1445,7 +1496,7 @@ GoTermination: ; Continue Termination
                 MsgBox, 4097, Orion, 
                 ( LTrim
                 Please revoke rights if any are present.
-                Sign off for "Orion" on the form BEFORE pressing 
+                Mark off "Orion" on the ticket BEFORE pressing 
                 "OK" to continue.
                 )
                 IfMsgBox Cancel 
@@ -1524,7 +1575,7 @@ GoTermination: ; Continue Termination
                     MsgBox, 4097, Orion Test, 
                     ( LTrim
                     Please revoke rights if any are present.
-                    Sign off for "Orion Test" on the form BEFORE pressing 
+                    Mark off "Orion Test" on the ticket BEFORE pressing 
                     "OK" to continue.
                     )
                     IfMsgBox Cancel 
@@ -1578,7 +1629,7 @@ GoTermination: ; Continue Termination
                 MsgBox, 4097, FSY Orion, 
                 ( LTrim
                 Please revoke rights if any are present.
-                Sign off for "FSY Orion" on the form BEFORE pressing 
+                Mark off "FSY Orion" on the ticket BEFORE pressing 
                 "OK" to continue.
                 )
                 IfMsgBox Cancel 
@@ -1605,7 +1656,7 @@ GoTermination: ; Continue Termination
             MsgBox, 4097, CRM/Gro, 
             ( LTrim
             Please remove rights.
-            Sign off for "Gro" on the form BEFORE pressing "OK" to 
+            Mark off "Gro" on the ticket BEFORE pressing "OK" to 
             continue.
             )
             IfMsgBox Cancel 
@@ -1669,6 +1720,58 @@ GoTermination: ; Continue Termination
         }
 
 
+        if (cvent) { ;broken
+            ; Open CVENT website.
+            if (name == "") {
+                InputBox, name, Name, First and Last Name for: %netID%
+            }
+            if (OpenSite("https://app.cvent.com/Subscribers/Admin/Users/UsersGrid/Index/View", "Users") == "Cancel") {
+                MsgBox, Automation has been aborted.
+                return
+            }
+
+            if (browser == "") {
+                browser := BrowserCheck()
+                if (browser == "Abort") {
+                    MsgBox, Automation has been aborted.
+                    return
+                }
+            }
+
+            ; Wait for website to build properly, then find user.
+            Sleep, 3000
+            if (browser == "Chrome" || browser == "Edge") {
+                Loop, 21
+                {
+                    Send, {Tab}
+                }
+            }                                     
+            Sleep, 200
+            Send %name%
+            Sleep, 500
+
+            MsgBox, 4097, CVENT, 
+            ( LTrim
+            Name: %name%
+
+            Search for the employee.
+            If they are not found in the list, they most likely don't 
+            have an account. 
+
+            If the account has been found:
+            Select the profile
+            Revoke access in "Visibility Settings" and "Access Settings"
+
+            Click "OK" to continue.
+            )
+            IfMsgBox Cancel 
+            {
+                MsgBox, Automation has been aborted.
+                return
+            }
+        }
+        
+        
         if (workstation) {
             ; Open the inventory website and navigate to the employee's workstation
             if (OpenSite("https://ceregadmin.byu.edu/o3/admin/inventory/manageInventory/", "Inventory Management") == "Cancel") {
@@ -1691,7 +1794,7 @@ GoTermination: ; Continue Termination
             - Go to the "Workstations" tab
             - Search for the employee's workstation
             - Change the name to "was %name%"
-            - Sign off for "Workstation" on the form BEFORE pressing
+            - Mark off "Workstation" on the ticket BEFORE pressing
               "OK" to continue.
             )
             IfMsgBox Cancel 
@@ -1729,7 +1832,7 @@ GoTermination: ; Continue Termination
             ; Search for person.
             Send % netID
             Sleep, 5000
-            Send, {Enter}{Tab}{Tab}{Tab}
+            Send, {Enter}{Tab}{Tab}{Tab}{Tab}{Tab}
             Sleep, 500
             if (turbo) {
                 Send, Employee termination  %netID%
@@ -1748,7 +1851,7 @@ GoTermination: ; Continue Termination
 
                 Please verify the account is correct.
                 Once verified, click on "Order Now".
-                Sign off for "Email Termination" on the form.
+                Mark off "Email Termination" on the ticket.
                 "OK" when finished.
                 )
                 IfMsgBox Cancel 
@@ -1766,8 +1869,8 @@ GoTermination: ; Continue Termination
                 return
             }
 
-            clipboard := name . " - " . netID
-            MsgBox, 0, MasterCourses, Name and NetID have been copied to clipboard. Add to removal list.
+            clipboard := netID
+            MsgBox, 0, MasterCourses, NetID has been copied to clipboard. Add to removal list.
         }
 
 
