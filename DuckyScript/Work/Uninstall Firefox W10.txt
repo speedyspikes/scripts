@@ -1,0 +1,13 @@
+REM Uninstall Firefox on Windows 10
+DEFAULTDELAY 100
+
+GUI r
+DELAY 500
+STRING cmd
+CONTROL SHIFT ENTER
+DELAY 500
+LEFT
+ENTER
+
+STRING “C:\Program Files\Mozilla Firefox\uninstall\helper.exe” /s
+ENTER

@@ -1,0 +1,14 @@
+REM Turn off Bitlocker with Command Prompt
+DEFAULTDELAY 100
+
+GUI r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 1000
+
+REM STRING manage-bde -unlock C: -RecoveryPassword 416108-199221-632181-323389-289949-270820-710578-099858
+REM ENTER
+REM DELAY 1000
+STRING manage-bde -off C:
+ENTER

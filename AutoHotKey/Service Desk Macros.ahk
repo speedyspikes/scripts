@@ -645,7 +645,7 @@ GoHire: ; This Go button will continue the new hire automation.
     if (email) {
         ; !ADD! Check if variables are blank. Ask for input if so.
         ; Open email order website.
-        if (OpenSite("https://support.byu.edu/it?id=sc_cat_item&sys_id=114375990a0a3c0e117557a6694dd190", "Service Catalog") == "Cancel") {
+        if (OpenSite("https://support.byu.edu/it?id=sc_cat_item&sys_id=f87136f31b4fb190319b7592cd4bcb0a", "Service Catalog") == "Cancel") {
             MsgBox, Automation has been aborted.
             return
         }
@@ -662,27 +662,27 @@ GoHire: ; This Go button will continue the new hire automation.
         Sleep, 3000
 
         if (browser == "Chrome" || browser == "Edge") {
-            loop, 27
+            loop, 25
             {
             Send, {Tab}
             }
         }
 
         ; If new hire is a student, change email type to student.
-        if (class == "Student") {
-            Send, {Down}{Down}
-        }
-        Send, {Tab}{Tab}
+        ; if (class == "Student") {
+        ;     Send, {Down}{Down}
+        ; }
+        ; Send, {Tab}{Tab}
 
         ; Search for person.
         Send % netID
         Sleep, 5000
         Send, {Enter}{Tab}{Tab}
         Sleep, 500
-        Send, {CtrlDown}a{CtrlUp}{Delete}
+        ; Send, {CtrlDown}a{CtrlUp}{Delete}
         Send % emailAddress
         Sleep, 200
-        Send, {Tab}{Tab}
+        Send, {Tab}{Tab}{Tab}
         Sleep, 200
         ; Check if email was created successfully. Create variable based on 
         ; this. Use variable for other email uses.
