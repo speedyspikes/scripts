@@ -1,0 +1,10 @@
+REM Collection of software to install
+DEFAULTDELAY 100
+
+GUI r
+STRING H:\Public\Adobe\Adobe Connect\Adobe Connect Installer.exe
+ENTER
+DELAY 500
+LEFT
+DELAY 200
+ENTER

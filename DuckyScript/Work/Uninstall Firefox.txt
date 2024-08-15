@@ -1,0 +1,10 @@
+REM Run Firefox uninstall file silent
+DEFAULTDELAY 100
+
+GUI r
+DELAY 500
+STRING C:\Program Files\Mozilla Firefox\uninstall\helper.exe /s
+ENTER
+DELAY 2000
+LEFT
+ENTER

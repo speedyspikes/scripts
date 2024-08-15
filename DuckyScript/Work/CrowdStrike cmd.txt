@@ -1,0 +1,15 @@
+REM For running in recovery mode
+
+STRING C:
+ENTER
+STRING cd C:\Windows\System32\drivers\CrowdStrike
+ENTER
+STRING del C-00000291
+TAB
+DELAY 2000
+ENTER
+DELAY 500
+STRING exit
+ENTER
+DELAY 500
+ENTER
