@@ -1,0 +1,12 @@
+#!/bin/zsh
+arg=$1
+
+if [[ $arg = "start" ]] || [[ $arg = "" ]]; then
+    echo "starting nessus"
+    sudo launchctl start com.tenablesecurity.nessusd
+elif [[ $arg = "stop" ]]; then
+    echo "stopping nessus"
+    sudo launchctl stop com.tenablesecurity.nessusd
+else
+    echo "invalid argument"
+fi
