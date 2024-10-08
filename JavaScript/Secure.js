@@ -128,7 +128,7 @@ while (true) {
             badusb.press("ENTER");
             delay(1000);
             // badusb.print('Xcopy /E \\\\dcestorage02.byu.edu\\repository\\dceadmin C:\\Users\\');
-            badusb.println("cd \\Users");
+            badusb.println("cd \\");
             badusb.println("mkdir dceadmin");
             badusb.println("copy NUL dceadmin\\dceadmin.txt");
             badusb.print("shutdown -r");
