@@ -1,12 +1,5 @@
 // flipper_js.d.ts
 
-declare module "gpio" {
-    export function init(pin: string, mode: string, pull: string): void;
-    export function startAnalog(value: number): void;
-    export function readAnalog(pin: string): number;
-    export function write(pin: string, value: boolean): void;
-    export function read(pin: string): boolean;
-}
 
 // BadUSB Module
 declare module "badusb" {
@@ -16,7 +9,9 @@ declare module "badusb" {
     */
     export function setup(config: { vid: number, pid: number, mfr_name: string, prod_name: string, layout_path: string }): void;
 
-    // Quits BadUSB mode and reverts the Flipper USB port to normal.
+    /** 
+     * Quits BadUSB mode and reverts the Flipper USB port to normal.
+     */
     export function quit(): void;
 
     /**
@@ -43,7 +38,9 @@ declare module "badusb" {
     */
     export function release(...keys: string[]): void;
 
-    // Releases all held keys.
+    /** 
+     * Releases all held keys.
+     */ 
     export function releaseAll(): void;
 
     /**
@@ -141,4 +138,12 @@ declare module "infrared" {
 declare module "nfc" {
     export function read(): Uint8Array;
     export function write(data: string): void;
+}
+
+declare module "gpio" {
+    export function init(pin: string, mode: string, pull: string): void;
+    export function startAnalog(value: number): void;
+    export function readAnalog(pin: string): number;
+    export function write(pin: string, value: boolean): void;
+    export function read(pin: string): boolean;
 }
