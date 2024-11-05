@@ -1,5 +1,7 @@
-// flipper_js.d.ts
-
+/* flipper_js.d.ts
+These functions have been referenced from here:
+https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript
+*/
 
 // BadUSB Module
 declare module "badusb" {
