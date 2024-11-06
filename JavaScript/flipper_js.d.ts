@@ -3,6 +3,51 @@ These functions have been referenced from here:
 https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript
 */
 
+// Globals
+/* 
+// globals-console
+console.error("error message", 7.1, 'c', 'f', 12, false); // "[E][JS] error message 7.100000 c f 12 false"
+console.warn("warning"); // Warning
+console.log("info", 4.2); // Info
+console.debug("debug", 1); // Debug only
+
+// globals-delay
+export function delay(milliseconds: number): void;
+
+// globals-print
+print("hello");
+print(42);
+let answer=true;
+print("got",answer);
+
+// globals-require
+let badusb = require("badusb");
+
+// globals-parse-int
+export function parse_int(num_string: string): number;
+
+// globals-to-string
+export function to_string(num: number): string;
+
+// globals-to-hex-string
+export function to_hex_string(num: number): string;
+
+// globals-to-lower-case
+export function to_lower_case(string): string;
+
+// globals-to-upper-case
+export function to_upper_case(string): string;
+
+// globals-filepath
+// The __filepath is the path to the JS file that is being run.
+// __filepath
+
+// globals-filepath
+// The __dirpath is the folder where the JS file is being run from.
+// __dirpath
+
+*/
+
 // BadUSB Module
 declare module "badusb" {
     /**
