@@ -382,52 +382,762 @@ declare module "keyboard" {
 }
 
 
+// Math Module
+/**
+ * The math module provides a variety of mathematical functions and constants.
+ */
+declare module "math" {
+    /**
+     * Returns the absolute value of a number.
+     * @param x - The input number.
+     * @returns The absolute value of `x`, or `undefined` if the operation fails.
+     */
+    function abs(x: number): number | undefined;
 
+    /**
+     * Returns the arccosine (inverse cosine) of a number.
+     * @param x - The input number.
+     * @returns The arccosine of `x`, or NaN if the input is out of range.
+     */
+    function acos(x: number): number;
+
+    /**
+     * Returns the hyperbolic arccosine of a number.
+     * @param x - The input number.
+     * @returns The hyperbolic arccosine of `x`, `undefined` if out of range, or an error if the operation fails.
+     */
+    function acosh(x: number): number | undefined | Error;
+
+    /**
+     * Returns the arcsine (inverse sine) of a number.
+     * @param x - The input number.
+     * @returns The arcsine of `x`, or an error if the input is out of range.
+     */
+    function asin(x: number): number | Error;
+
+    /**
+     * Returns the hyperbolic arcsine of a number.
+     * @param x - The input number.
+     * @returns The hyperbolic arcsine of `x`, or an error if the operation fails.
+     */
+    function asinh(x: number): number | Error;
+
+    /**
+     * Returns the arctangent (inverse tangent) of a number.
+     * @param x - The input number.
+     * @returns The arctangent of `x`, or an error if the operation fails.
+     */
+    function atan(x: number): number | Error;
+
+    /**
+     * Returns the arctangent of `y / x`, using the signs of both arguments to determine the correct quadrant.
+     * @param y - The y-coordinate.
+     * @param x - The x-coordinate.
+     * @returns The arctangent of `y / x`, or an error if the operation fails.
+     */
+    function atan2(y: number, x: number): number | Error;
+
+    /**
+     * Returns the hyperbolic arctangent of a number.
+     * @param x - The input number.
+     * @returns The hyperbolic arctangent of `x`, or an error if the operation fails.
+     */
+    function atanh(x: number): number | Error;
+
+    /**
+     * Returns the cube root of a number.
+     * @param x - The input number.
+     * @returns The cube root of `x`, or an error if the operation fails.
+     */
+    function cbrt(x: number): number | Error;
+
+    /**
+     * Rounds a number up to the next largest integer.
+     * @param x - The input number.
+     * @returns The smallest integer greater than or equal to `x`, or an error if the operation fails.
+     */
+    function ceil(x: number): number | Error;
+
+    /**
+     * Returns the number of leading zero bits in the 32-bit binary representation of a number.
+     * @param x - The input number.
+     * @returns The number of leading zero bits, or an error if the operation fails.
+     */
+    function clz32(x: number): number | Error;
+
+    /**
+     * Returns the cosine of a number.
+     * @param x - The input number.
+     * @returns The cosine of `x`, or an error if the operation fails.
+     */
+    function cos(x: number): number | Error;
+
+    /**
+     * Returns `e` raised to the power of a number.
+     * @param x - The exponent.
+     * @returns `e^x`, or an error if the operation fails.
+     */
+    function exp(x: number): number | Error;
+
+    /**
+     * Rounds a number down to the nearest integer.
+     * @param x - The input number.
+     * @returns The largest integer less than or equal to `x`, or an error if the operation fails.
+     */
+    function floor(x: number): number | Error;
+
+    /**
+     * Determines if two values are equal within a specified delta.
+     * @param x - The first number to compare.
+     * @param y - The second number to compare.
+     * @param delta - The allowable difference between `x` and `y`.
+     * @returns `true` if the values are equal within delta, otherwise `false`.
+     */
+    function isEqual(x: number, y: number, delta: number): boolean | Error;
+
+    /**
+     * Returns the natural logarithm (base e) of a number.
+     * @param x - The input number.
+     * @returns The natural logarithm of `x`, or an error if the operation fails.
+     */
+    function log(x: number): number | Error;
+
+    /**
+     * Returns the maximum of two numbers.
+     * @param x - The first number.
+     * @param y - The second number.
+     * @returns The larger of `x` and `y`, or an error if the operation fails.
+     */
+    function max(x: number, y: number): number | Error;
+
+    /**
+     * Returns the minimum of two numbers.
+     * @param x - The first number.
+     * @param y - The second number.
+     * @returns The smaller of `x` and `y`, or an error if the operation fails.
+     */
+    function min(x: number, y: number): number | Error;
+
+    /**
+     * Returns `base` raised to the power of `exponent`.
+     * @param base - The base number.
+     * @param exponent - The exponent.
+     * @returns The result of `base^exponent`, or an error if the operation fails.
+     */
+    function pow(base: number, exponent: number): number | Error;
+
+    /**
+     * Generates a random number between 0 (inclusive) and 2 (exclusive).
+     * @returns A random number in the range [0, 2), or an error if the operation fails.
+     */
+    function random(): number | Error;
+
+    /**
+     * Returns the sign of a number.
+     * @param x - The input number.
+     * @returns `1` if `x` is positive, `-1` if `x` is negative, `0` if `x` is zero, or an error if the operation fails.
+     */
+    function sign(x: number): number | Error;
+
+    /**
+     * Returns the sine of a number.
+     * @param x - The input number.
+     * @returns The sine of `x`, or an error if the operation fails.
+     */
+    function sin(x: number): number | Error;
+
+    /**
+     * Returns the square root of a number.
+     * @param x - The input number.
+     * @returns The square root of `x`, or an error if the operation fails.
+     */
+    function sqrt(x: number): number | Error;
+
+    /**
+     * Truncates the fractional part of a number, leaving only the integer part.
+     * @param x - The input number.
+     * @returns The integer part of `x`, or an error if the operation fails.
+     */
+    function trunc(x: number): number | Error;
+
+    /**
+     * Represents the constant pi (π).
+     */
+    const PI: number;
+
+    /**
+     * Represents the base of natural logarithms, e.
+     */
+    const E: number;
+
+    /**
+     * Represents the smallest positive number greater than zero that can be represented as a double.
+     */
+    const EPSILON: number;
+}
+
+
+// Notification Module
+/**
+ * The notification module provides functions to interact with the Flipper Zero's status LED, sounds, and vibration for user feedback.
+ */
 declare module "notification" {
-    export function error(): void;
-    export function success(): void;
+    /**
+     * Indicates a successful action to the user.
+     * The status LED blinks green, the Flipper vibrates, and a "do-de-da-lat" success sound is played.
+     */
+    function success(): void;
+
+    /**
+     * Indicates an error to the user.
+     * The status LED blinks red, the Flipper vibrates, and a "do-do" error sound is played.
+     */
+    function error(): void;
+
+    /**
+     * Causes the status LED to blink in the specified color and duration.
+     * @param color - The color of the LED blink. Supported colors are "blue", "red", "green", "yellow", "cyan", "magenta".
+     * @param type - The type of blink duration. Supported types are "short" and "long".
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function blink(color: "blue" | "red" | "green" | "yellow" | "cyan" | "magenta", type: "short" | "long"): void | Error;
 }
 
+
+// Serial Module
+/**
+ * The serial module provides functions for USART and LPUART communication on the Flipper Zero.
+ */
 declare module "serial" {
-    export function setup(type: string, baudrate: number): void;
-    export function readBytes(length: number, timeout: number): Uint8Array | undefined;
-    export function write(data: Uint8Array): void;
+    /**
+     * Initializes the serial port with the specified port and baud rate.
+     * Once initialized, the port cannot be re-initialized until `end` is called.
+     * @param port - The port to use; either "usart" (pins 13 & 14) or "lpuart" (pins 15 & 16).
+     * @param baudrate - The baud rate for the serial communication.
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function setup(port: "usart" | "lpuart", baudrate: number): void | Error;
+
+    /**
+     * Deinitializes the serial port.
+     * Should only be called after `setup` has been called.
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function end(): void | Error;
+
+    /**
+     * Sends data on the serial port.
+     * The port must already be initialized. The data can be a string, number, or array of numbers.
+     * Each number in the array must be in the range 0x00 to 0xFF.
+     * @param data - The data to send. Can be a string, a single byte (number), or an array of bytes (Uint8Array or number[]).
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function write(data: string | number | Uint8Array | number[]): void | Error;
+
+    /**
+     * Reads a specified number of bytes from the serial port as a string.
+     * @param readlen - The number of bytes to read.
+     * @param timeout - Optional timeout in milliseconds to wait for data.
+     * @returns The read data as a string, `undefined` if no data is received, or an error if the operation fails.
+     */
+    function read(readlen: number, timeout?: number): string | undefined | Error;
+
+    /**
+     * Reads a line (ending in a newline) from the serial port as a string.
+     * @param timeout - Optional timeout in milliseconds to wait for data.
+     * @returns The read line as a string, `undefined` if no data is received, or an error if the operation fails.
+     */
+    function readln(timeout?: number): string | undefined | Error;
+
+    /**
+     * Reads a specified number of bytes from the serial port as an array of numbers.
+     * @param readlen - The number of bytes to read.
+     * @param timeout - Optional timeout in milliseconds to wait for data.
+     * @returns The read data as an array of numbers, `undefined` if no data is received, or an error if the operation fails.
+     */
+    function readBytes(readlen: number, timeout?: number): number[] | undefined | Error;
+
+    /**
+     * Reads any available data from the serial port as a string.
+     * @param timeout - Optional timeout in milliseconds to wait for data.
+     * @returns The read data as a string, `undefined` if no data is received, or an error if the operation fails.
+     */
+    function readAny(timeout?: number): string | undefined | Error;
+
+    /**
+     * Reads data from the serial port until a specified string or byte pattern is matched.
+     * @param expectData - The data to expect, specified as a string or array of bytes.
+     * @param timeout - Optional timeout in milliseconds to wait for data.
+     * @returns The index at which the expected data was matched, `undefined` if not matched, or an error if the operation fails.
+     */
+    function expect(expectData: string | number[], timeout?: number): number | undefined | Error;
 }
 
+
+// Storage Module
+/**
+ * The storage module provides functions for accessing and managing files on the Flipper Zero's SD card.
+ */
 declare module "storage" {
-    export function write(filePath: string, data: string): void;
-    export function append(filePath: string, data: string): void;
-    export function read(filePath: string): Uint8Array;
-    export function remove(filePath: string): void;
-    export function listFiles(directory: string): string[];
+    /**
+     * Reads the contents of a file as a string.
+     * Version 1: Reads the file at the specified path up to 128KB.
+     * Version 2: Reads the file from the specified offset up to the specified size as a binary array.
+     * @param path - The file path.
+     * @param size - Optional size in bytes to read (only for version 2).
+     * @param offset - Optional offset in bytes to start reading from (only for version 2).
+     * @returns The file contents as a string or a binary array, or an error if the operation fails.
+     */
+    function read(path: string, size?: number, offset?: number): string | Uint8Array | Error;
+
+    /**
+     * Writes data to a file, overwriting any existing file at the path.
+     * Version 1: Writes a string to the specified path.
+     * Version 2: Allows writing binary data.
+     * @param path - The file path.
+     * @param data - The data to write, either as a string or array.
+     * @returns `true` on success, or an error if the operation fails.
+     */
+    function write(path: string, data: string | Uint8Array): boolean | Error;
+
+    /**
+     * Appends data to the end of a file.
+     * @param path - The file path.
+     * @param data - The data to append as a string.
+     * @returns `true` on success, or an error if the operation fails.
+     */
+    function append(path: string, data: string): boolean | Error;
+
+    /**
+     * Copies a file from one path to another.
+     * @param sourcePath - The path of the file to copy.
+     * @param targetPath - The destination path.
+     * @returns `true` on success, or an error if the operation fails.
+     */
+    function copy(sourcePath: string, targetPath: string): boolean | Error;
+
+    /**
+     * Moves (renames) a file from one path to another.
+     * @param originalPath - The current file path.
+     * @param newPath - The new file path.
+     * @returns `true` on success, or an error if the operation fails.
+     */
+    function move(originalPath: string, newPath: string): boolean | Error;
+
+    /**
+     * Checks if a file exists at the specified path.
+     * @param path - The file path.
+     * @returns `true` if the file exists, `false` if it does not, or an error if the operation fails.
+     */
+    function exists(path: string): boolean | Error;
+
+    /**
+     * Creates a new directory at the specified path.
+     * @param path - The directory path.
+     * @returns `true` if the directory was created successfully, `false` otherwise.
+     */
+    function mkdir(path: string): boolean;
+
+    /**
+     * Removes a file at the specified path.
+     * @param path - The file path.
+     * @returns `true` if the file was removed successfully, or an error if the operation fails.
+     */
+    function remove(path: string): boolean | Error;
+
+    /**
+     * Initializes a virtual storage area by mapping it to a file.
+     * @param path - The path to the file to map as virtual storage.
+     * @returns `true` on success, or an error if the operation fails.
+     */
+    function virtualInit(path: string): boolean | Error;
+
+    /**
+     * Mounts virtual storage to the `/mnt/` folder.
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function virtualMount(): void | Error;
+
+    /**
+     * Unmounts virtual storage from the `/mnt/` folder.
+     * @returns `undefined` on success, or an error if the operation fails.
+     */
+    function virtualQuit(): void | Error;
 }
 
+
+// SubGHz Module
+/**
+ * The subghz module provides functions for accessing the subGHz radio on the Flipper Zero.
+ */
 declare module "subghz" {
-    export function setup(): void;
-    export function setFrequency(frequency: number): void;
-    export function transmitFile(filePath: string): void;
+    /**
+     * Ends the current session, allowing setup to be called again.
+     * Also used to check for an external module.
+     */
+    function end(): void;
+
+    /**
+     * Returns the current frequency in hertz of the received or last sent signal.
+     * @returns The current frequency as a number.
+     */
+    function getFrequency(): number;
+
+    /**
+     * Returns the current RSSI (Receive Signal Strength Indicator) for the received signal.
+     * The radio must be in receive mode.
+     * @returns The current RSSI or an error if the operation fails.
+     */
+    function getRssi(): number | Error;
+
+    /**
+     * Returns the current state of the radio.
+     * Valid states are "RX", "TX", "IDLE", or an empty string if uninitialized.
+     * @returns The current radio state.
+     */
+    function getState(): "RX" | "TX" | "IDLE" | "";
+
+    /**
+     * Checks if an external CC1101 radio module is being used.
+     * @returns `true` if an external radio is in use, otherwise `false`.
+     */
+    function isExternal(): boolean;
+
+    /**
+     * Sets the frequency of the radio.
+     * The radio must be in the "IDLE" state before setting the frequency.
+     * @param frequency - The frequency to set in hertz.
+     * @returns The set frequency as a number, or an error if the operation fails.
+     */
+    function setFrequency(frequency: number): number | Error;
+
+    /**
+     * Sets the state of the radio to "IDLE".
+     */
+    function setIdle(): void;
+
+    /**
+     * Sets the state of the radio to "RX" (receive mode).
+     */
+    function setRx(): void;
+
+    /**
+     * Initializes the subGHz radio, configuring it to use an external radio if specified in firmware settings.
+     * Sets the radio state to "IDLE" and defaults the frequency to 433.92 MHz.
+     */
+    function setup(): void;
+
+    /**
+     * Transmits a signal based on the specified .sub file.
+     * The file can use a supported protocol or "RAW" format and will be transmitted on the frequency specified in the file.
+     * The `getFrequency` value will be updated to this frequency.
+     * Optionally, a repeat count can be provided to repeat the signal (not available on Xtreme FW).
+     * @param file - The path to the .sub file.
+     * @param repeat - Optional. The number of times to repeat the signal.
+     * @returns `true` if transmission was successful, `undefined` if an error occurred, or an error if the operation fails.
+     */
+    function transmitFile(file: string, repeat?: number): boolean | undefined | Error;
 }
 
+
+// Submenu Module
+/**
+ * The submenu module provides functions to create and display a scrollable menu of items, returning the selected item.
+ */
 declare module "submenu" {
-    export function addItem(name: string, value: number): void;
-    export function setHeader(header: string): void;
-    export function show(): number;
+    /**
+     * Adds a new entry to the menu.
+     * @param label - The name of the entry to be displayed.
+     * @param id - The identifier associated with this entry, which will be returned upon selection.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function addItem(label: string, id: number): void | Error;
+
+    /**
+     * Sets the header label displayed at the top of the submenu.
+     * @param label - The header text to display.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function setHeader(label: string): void | Error;
+
+    /**
+     * Displays the submenu and waits for the user to select an item.
+     * @returns The id of the selected item, or `undefined` if the user pressed the `Back` button.
+     */
+    function show(): number | undefined;
 }
 
+
+// Textbox Module
+/**
+ * The textbox module allows the creation of a dynamic display of text on the Flipper Zero.
+ * Contents are displayed in a non-blocking way, enabling the script to continue running while updating the UI.
+ * Users can scroll through the textbox, but focus resets when updated.
+ */
 declare module "textbox" {
-    export function setConfig(alignment: string, textMode: string): void;
-    export function clearText(): void;
-    export function addText(text: string): void;
-    export function show(): void;
-    export function isOpen(): boolean;
-    export function close(): void;
+    /**
+     * Appends the specified text to the end of the textbox.
+     * @param contents - The text to append to the textbox.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function addText(contents: string): void | Error;
+
+    /**
+     * Closes the textbox.
+     * @returns `undefined`.
+     */
+    function close(): void;
+
+    /**
+     * Clears the contents of the textbox.
+     * @returns `undefined`.
+     * @note On Xtreme firmware, this function is still called `emptyText`.
+     */
+    function clearText(): void;
+
+    /**
+     * Checks if the textbox is currently open and visible.
+     * @returns `true` if the textbox is open, otherwise `false`.
+     */
+    function isOpen(): boolean;
+
+    /**
+     * Configures the textbox display settings.
+     * @param focus - The focus position when the textbox is updated. Valid values are `"start"` and `"end"`.
+     * @param font - The font to use in the textbox. Valid values are `"text"` and `"hex"`.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function setConfig(focus: "start" | "end", font: "text" | "hex"): void | Error;
+
+    /**
+     * Displays the textbox. The textbox will remain visible until closed by either calling `close` or the user pressing the `Back` button.
+     * @returns `undefined`.
+     */
+    function show(): void;
 }
 
+
+// Usbdisk Module
+/**
+ * The usbdisk module allows exposing a special file on the SD Card as a USB thumb drive via the Flipper Zero's USB port.
+ * This feature enables easy file transfers between the host computer and the Flipper Zero.
+ */
 declare module "usbdisk" {
-    export function start(imagePath: string): void;
-    export function wasEjected(): boolean;
-    export function stop(): void;
+    /**
+     * Creates a file that can be used as a virtual USB drive.
+     * @param path - The path to the file on the SD card.
+     * @param capacity - The size in bytes to reserve for the file.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function createImage(path: string, capacity: number): void | Error;
+
+    /**
+     * Exposes the specified file as a USB drive.
+     * @param path - The path to the file to expose as a USB drive.
+     * @returns `undefined` if successful, or an error if the operation fails.
+     */
+    function start(path: string): void | Error;
+
+    /**
+     * Detaches the USB drive.
+     * @returns `undefined`.
+     */
+    function stop(): void;
+
+    /**
+     * Checks if the USB drive has been ejected by the host computer.
+     * @returns `true` if the USB drive has been ejected, otherwise `false`.
+     */
+    function wasEjected(): boolean | Error;
 }
+
+
+// VGM (Video Game Module) Module
+/**
+ * The vgm module allows access to the sensors of the Video Game Module (VGM) on the Flipper Zero.
+ * It enables obtaining orientation data such as pitch, roll, and yaw, which is helpful for motion-based interactions.
+ */
+declare module "vgm" {
+    /**
+     * Returns the pitch (up/down angle) of the VGM in degrees, ranging from -90 to 90.
+     * @returns The pitch angle in degrees.
+     */
+    function getPitch(): number;
+
+    /**
+     * Returns the roll (left/right tilt) of the VGM in degrees, ranging from -180 to 180.
+     * @returns The roll angle in degrees.
+     */
+    function getRoll(): number;
+
+    /**
+     * Returns the yaw (rotation around the vertical axis) of the VGM in degrees, ranging from -180 to 180.
+     * @returns The yaw angle in degrees.
+     */
+    function getYaw(): number;
+
+    /**
+     * Measures the change in yaw over time and returns the amount of change if it exceeds the specified threshold.
+     * @param angle - The threshold of yaw change in degrees.
+     * @param timeout - Optional timeout in milliseconds to wait for the yaw change. Defaults to an indefinite wait if not provided.
+     * @returns The amount of yaw change if it exceeds the threshold, otherwise 0.
+     */
+    function deltaYaw(angle: number, timeout?: number): number;
+}
+
+
+// Widget Module
+/**
+ * The widget module enables non-blocking display of various UI elements on the Flipper Zero.
+ * Elements can be added, displayed, and managed dynamically.
+ */
+declare module "widget" {
+    /**
+     * Adds a filled box at the specified (x, y) coordinates with width `w` and height `h`.
+     * @param x - X coordinate (0 to 127).
+     * @param y - Y coordinate (0 to 63).
+     * @param w - Width of the box.
+     * @param h - Height of the box.
+     * @returns The ID of the created box for removal, or an error.
+     */
+    function addBox(x: number, y: number, w: number, h: number): number;
+
+    /**
+     * Adds a circle centered at (x, y) with radius `r`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param r - Radius of the circle.
+     * @returns The ID of the created circle for removal, or an error.
+     */
+    function addCircle(x: number, y: number, r: number): number;
+
+    /**
+     * Adds a filled disc centered at (x, y) with radius `r`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param r - Radius of the disc.
+     * @returns The ID of the created disc for removal, or an error.
+     */
+    function addDisc(x: number, y: number, r: number): number;
+
+    /**
+     * Sets a single pixel at (x, y).
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @returns The ID of the dot for removal, or an error.
+     */
+    function addDot(x: number, y: number): number;
+
+    /**
+     * Adds an outlined rectangle at (x, y) with width `w` and height `h`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param w - Width of the rectangle.
+     * @param h - Height of the rectangle.
+     * @returns The ID of the created frame for removal, or an error.
+     */
+    function addFrame(x: number, y: number, w: number, h: number): number;
+
+    /**
+     * Adds a glyph at (x, y) specified by the character code `ch`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param ch - Character code of the glyph.
+     * @returns The ID of the created glyph for removal, or an error.
+     */
+    function addGlyph(x: number, y: number, ch: number): number;
+
+    /**
+     * Adds an icon at (x, y) using the specified icon name.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param icon - Name of the icon.
+     * @returns The ID of the created icon for removal, or an error.
+     */
+    function addIcon(x: number, y: number, icon: string): number;
+
+    /**
+     * Draws a line from (x1, y1) to (x2, y2).
+     * @param x1 - X coordinate of the start point.
+     * @param y1 - Y coordinate of the start point.
+     * @param x2 - X coordinate of the end point.
+     * @param y2 - Y coordinate of the end point.
+     * @returns The ID of the created line for removal, or an error.
+     */
+    function addLine(x1: number, y1: number, x2: number, y2: number): number;
+
+    /**
+     * Adds a filled box at (x, y) with width `w`, height `h`, and rounded corners with radius `r`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param w - Width of the box.
+     * @param h - Height of the box.
+     * @param r - Radius of the rounded corners.
+     * @returns The ID of the created rounded box for removal, or an error.
+     */
+    function addRbox(x: number, y: number, w: number, h: number, r: number): number;
+
+    /**
+     * Adds an outlined rectangle at (x, y) with width `w`, height `h`, and rounded corners with radius `r`.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param w - Width of the rectangle.
+     * @param h - Height of the rectangle.
+     * @param r - Radius of the rounded corners.
+     * @returns The ID of the created rounded frame for removal, or an error.
+     */
+    function addRframe(x: number, y: number, w: number, h: number, r: number): number;
+
+    /**
+     * Adds text at (x, y) with the specified font.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param font - Font to use. Valid values are "Primary" and "Secondary".
+     * @param text - Text to display.
+     * @returns The ID of the created text element for removal, or an error.
+     */
+    function addText(x: number, y: number, font: string, text: string): number;
+
+    /**
+     * Adds an XBM image at (x, y) using the specified image identifier.
+     * @param x - X coordinate.
+     * @param y - Y coordinate.
+     * @param index - Identifier of the XBM image.
+     * @returns The ID of the created XBM image for removal, or an error.
+     */
+    function addXbm(x: number, y: number, index: number): number;
+
+    /**
+     * Closes the widget, removing it from the display.
+     */
+    function close(): void;
+
+    /**
+     * Loads an XBM image from a file, returning its identifier for use in `addXbm`.
+     * @param path - Path to the XBM file.
+     * @returns The identifier for the loaded image, or an error.
+     */
+    function loadImageXbm(path: string): number;
+
+    /**
+     * Removes a previously added widget element by its ID.
+     * @param id - ID of the element to remove.
+     * @returns `true` if the element was removed successfully, otherwise `false`.
+     */
+    function remove(id: number): boolean;
+
+    /**
+     * Checks if the widget is currently displayed.
+     * @returns `true` if the widget is open, otherwise `false`.
+     */
+    function isOpen(): boolean;
+
+    /**
+     * Displays the widget, making it visible until closed.
+     */
+    function show(): void;
+}
+
 
 declare module "settings" {
     export function set(key: string, value: any): void;
