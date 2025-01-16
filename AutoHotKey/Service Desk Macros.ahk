@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetKeyDelay, .01
 
 author := "SpeedySpikes"
-last_updated := "6/25/2024"
+last_updated := "1/16/2025"
 
 /*
 This is an AutoHotKey automation. This is not a direct API to anything. It uses
@@ -216,41 +216,7 @@ return
 
 
 ^+2:: ; Open Jabra Ticket
-    if (OpenSite("https://dcehelpdesk.byu.edu/jira/projects/DH/queues/custom/20", "Service project") == "Cancel") {
-        MsgBox, Automation has been aborted.
-        return
-    }
-    
-    Sleep, 200
-    Send, c
-    InputBox, jabra, Jabra, Jabra Number:
-    Send, {Tab}{Tab}{Tab}
-    Sleep, 400
-    Send, Other
-    Sleep, 200
-    Send, {Enter}
-    Sleep, 500
-    Send, {Tab}{Tab}
-    Send, Jabra %jabra%
-    Sleep, 1000
-    loop, 16
-    {
-        Send, {Tab}
-    }
-    Send, Please return Jabra to room 405 when meeting is over.
-    Sleep, 500
-    loop, 5
-    {
-        Send, {Tab}
-    }
-    Sleep, 500
-    Send, Jabra
-    Send, {Tab}
-    Sleep, 500
-    Send, Trivial
-    Send, {Tab}{Tab}{Tab}
-    Send, Default
-    Send, {Tab}
+    Run, https://support.byu.edu/ce?id=sc_cat_item&sys_id=f75544b51b8c0e10319b7592cd4bcb48
 return
 
 
