@@ -135,7 +135,7 @@ function main() {
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
-                                badusb.push('ESCAPE');
+                                badusb.press('ESCAPE');
                                 badusb.println(':wq');
                                 
                                 notify.success();
@@ -224,7 +224,7 @@ function main() {
         else if (r === 2) {  //SSH
             while (true) {
                 submenu.addItem("config", 0);
-                // submenu.addItem("CentOS", 1);
+                submenu.addItem("script", 1);
                 // submenu.addItem("2", 2);
                 // submenu.addItem("3", 3);
                 let r1 = submenu.show();
@@ -263,7 +263,7 @@ function main() {
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
-                                badusb.push('ESCAPE');
+                                badusb.press('ESCAPE');
                                 badusb.println(':wq');
                                 
                                 notify.success();
@@ -280,19 +280,145 @@ function main() {
                             } else {usb_nc()}
                         }
                 }
-                /*
-                else if (r1 === 1) {  //1
-                    print("\nBadUSB: 1");
-                    while (true) {
-                        submenu.addItem("vi", 0);
-                        submenu.addItem("data", 1);
-                        submenu.addItem("save", 2);
-                        submenu.addItem("apply", 3);
-                        let r2 = submenu.show();
-                        if (r2 === undefined) {break}
-                    
-                    }
-                }*/
+                
+                else if (r1 === 1) {  //script
+                    print("\nBadUSB: script");
+                    let speed = 40;
+                    let ms = 200;
+                    badusb.println('#!/bin/bash', speed);
+                    badusb.press('ENTER');
+                    badusb.println('# Function to make the ssh file immutable', speed);
+                    badusb.println('make_immutable() {', speed);
+                    badusb.println('  sudo chmod 600 /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chown root:root /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chattr +i /etc/ssh/sshd_config', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Function to remove the immutable attribute from ssh_config', speed);
+                    badusb.println('remove_immutable() {', speed);
+                    badusb.println('  sudo chattr -i /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chmod 600 /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chown root:root /etc/ssh/sshd_config', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Function to remove the immutable attribute from a file', speed);
+                    badusb.println('edit_sshd_config() {', speed);
+                    badusb.println('  sudo chattr -i /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chmod 600 /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo chown root:root /etc/ssh/sshd_config', speed);
+                    badusb.println('  sudo nano /etc/ssh/sshd_config', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Function to add SSH keys to users', speed);
+                    badusb.println('add_ssh_keys() {', speed);
+                    badusb.println('  echo "- Execution: $(date)" >> /tmp/ssh_script.log', speed);
+                    badusb.println('  for user in "${users[@]}"; do', speed);
+                    badusb.println('    if id "$user" &>/dev/null; then', speed);
+                    badusb.println('      USER_HOME="/home/$user"', speed);
+                    badusb.println('      AUTH_KEYS="$USER_HOME/.ssh/authorized_keys"', speed);
+                    badusb.println('      sudo mkdir -p "$USER_HOME/.ssh"', speed);
+                    badusb.println('      sudo chmod 700 "$USER_HOME/.ssh"', speed);
+                    badusb.println('      echo "$key" | sudo tee $AUTH_KEYS > /dev/null', speed);
+                    badusb.println('      sudo chmod 600 $AUTH_KEYS', speed);
+                    badusb.println('      sudo chown -R "$user:$user" "$USER_HOME/.ssh"', speed);
+                    badusb.println('      echo "Added SSH key for $user"', speed);
+                    badusb.println('    else', speed);
+                    badusb.println('      echo "User $user does not exist"', speed);
+                    badusb.println('      echo "User $user does not exist" >> /tmp/ssh_script.log', speed);
+                    badusb.println('    fi', speed);
+                    badusb.println('  done', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Function to change passwords for all users', speed);
+                    badusb.println('change_passwords() {', speed);
+                    badusb.println('  read -sp "Enter new password: " new_password', speed);
+                    badusb.println('  echo', speed);
+                    badusb.println('  for user in "${users[@]}"; do', speed);
+                    badusb.println('    if id "$user" &>/dev/null; then', speed);
+                    badusb.println('      echo "$user:$new_password" | sudo chpasswd', speed);
+                    badusb.println('      echo "Password changed for $user"', speed);
+                    badusb.println('    else', speed);
+                    badusb.println('      echo "User $user does not exist"', speed);
+                    badusb.println('      echo "User $user does not exist" >> /tmp/ssh_script.log', speed);
+                    badusb.println('    fi', speed);
+                    badusb.println('  done', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('users=(', speed);
+                    badusb.println('  camille_jenatzy', speed);
+                    badusb.println('  gaston_chasseloup', speed);
+                    badusb.println('  leon_serpollet', speed);
+                    badusb.println('  william_vanderbilt', speed);
+                    badusb.println('  henri_fournier', speed);
+                    badusb.println('  maurice_augieres', speed);
+                    badusb.println('  arthur_duray', speed);
+                    badusb.println('  henry_ford', speed);
+                    badusb.println('  louis_rigolly', speed);
+                    badusb.println('  pierre_caters', speed);
+                    badusb.println('  paul_baras', speed);
+                    badusb.println('  victor_hemery', speed);
+                    badusb.println('  fred_marriott', speed);
+                    badusb.println('  lydston_hornsted', speed);
+                    badusb.println('  kenelm_guinness', speed);
+                    badusb.println('  rene_thomas', speed);
+                    badusb.println('  ernest_eldridge', speed);
+                    badusb.println('  malcolm_campbell', speed);
+                    badusb.println('  ray_keech', speed);
+                    badusb.println('  john_cobb', speed);
+                    badusb.println('  dorothy_levitt', speed);
+                    badusb.println('  paula_murphy', speed);
+                    badusb.println('  betty_skelton', speed);
+                    badusb.println('  rachel_kushner', speed);
+                    badusb.println('  kitty_oneil', speed);
+                    badusb.println('  jessi_combs', speed);
+                    badusb.println('  andy_green', speed);
+                    badusb.println(')', speed);
+                    badusb.println('key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcM4aDj8Y4COv+f8bd2WsrIynlbRGgDj2+q9aBeW1Umj5euxnO1vWsjfkpKnyE/ORsI6gkkME9ojAzNAPquWMh2YG+n11FB1iZl2S6yuZB7dkVQZSKpVYwRvZv2RnYDQdcVnX9oWMiGrBWEAi4jxcYykz8nunaO2SxjEwzuKdW8lnnh2BvOO9RkzmSXIIdPYgSf8bFFC7XFMfRrlMXlsxbG3u/NaFjirfvcXKexz06L6qYUzob8IBPsKGaRjO+vEdg6B4lH1lMk1JQ4GtGOJH6zePfB6Gf7rp31261VRfkpbpaDAznTzh7bgpq78E7SenatNbezLDaGq3Zra3j53u7XaSVipkW0S3YcXczhte2J9kvo6u6s094vrcQfB9YigH4KhXpCErFk08NkYAEJDdqFqXIjvzsro+2/EW1KKB9aNPSSM9EZzhYc+cBAl4+ohmEPej1m15vcpw3k+kpo1NC2rwEXIFxmvTme1A2oIZZBpgzUqfmvSPwLXF0EyfN9Lk= SCORING KEY DO NOT REMOVE"', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Function to restart SSH service', speed);
+                    badusb.println('restart_ssh() {', speed);
+                    badusb.println('  sudo systemctl restart sshd', speed);
+                    badusb.println('}', speed);
+                    badusb.press('ENTER');
+                    delay(ms);
+                    badusb.println('# Main script logic', speed);
+                    badusb.println('if [[ $1 == "i" ]]; then', speed);
+                    badusb.println('  make_immutable', speed);
+                    badusb.println('elif [[ $1 == "w" ]]; then', speed);
+                    badusb.println('  remove_immutable', speed);
+                    badusb.println('elif [[ $1 == "e" ]]; then', speed);
+                    badusb.println('  edit_sshd_config', speed);
+                    badusb.println('elif [[ $1 == "key" ]]; then', speed);
+                    badusb.println('  add_ssh_keys $users $key', speed);
+                    badusb.println('elif [[ $1 == "p" ]]; then', speed);
+                    badusb.println('  change_passwords', speed);
+                    badusb.println('elif [[ $1 == "r" ]]; then', speed);
+                    badusb.println('  restart_ssh', speed);
+                    badusb.println('elif [[ $1 == "a" ]]; then', speed);
+                    badusb.println('  make_immutable', speed);
+                    badusb.println('  add_ssh_keys $users $key', speed);
+                    badusb.println('  restart_ssh', speed);
+                    badusb.println('elif [[ $1 == "l" ]]; then', speed);
+                    badusb.println('  cat /tmp/ssh_script.log', speed);
+                    badusb.println('else', speed);
+                    badusb.println('  echo "Usage: $0 {option}"', speed);
+                    badusb.println('  echo "Options:"', speed);
+                    badusb.println('  echo "  i     Make sshd_config immutable"', speed);
+                    badusb.println('  echo "  w     Write/remove immutable attribute from sshd_config"', speed);
+                    badusb.println('  echo "  e     Edit sshd_config"', speed);
+                    badusb.println('  echo "  key   Add SSH keys to users"', speed);
+                    badusb.println('  echo "  r     Restart SSH service"', speed);
+                    badusb.println('  echo "  a     Run i, key, r"', speed);
+                    badusb.println('  echo "  l     Show log"', speed);
+                    badusb.println('  exit 1', speed);
+                    badusb.println('fi', speed);
+                }
             }
         }
         
