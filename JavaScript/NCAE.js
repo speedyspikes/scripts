@@ -57,12 +57,13 @@ function main() {
                                 notify.blink("green", "short");
                                 
                                 badusb.println('      addresses:');
-                                badusb.print('        - 172.18.26.');
-                                badusb.println(keyboard.text(4, "")+'/16');
-                                badusb.println('      gateway4: 172.18.0.1');
+                                badusb.print('        - 192.168.6.');
+                                badusb.println(keyboard.text(4, "")+'/24');
+                                badusb.println('      gateway4: 192.168.6.1');
                                 badusb.println('      nameservers:');
                                 badusb.println('        addresses:');
-                                badusb.print('          - 172.18.0.1');
+                                badusb.println('          - 192.168.6.12');
+                                badusb.print('          - 8.8.8.8');
                                 
                                 notify.success();
                             } else {usb_nc()}
@@ -84,9 +85,10 @@ function main() {
                     print("\nBadUSB: Ubuntu Network");
                     while (true) {
                         submenu.addItem("vi", 0);
-                        submenu.addItem("data", 1);
-                        submenu.addItem("save", 2);
-                        submenu.addItem("apply", 2);
+                        submenu.addItem("data internal", 1);
+                        submenu.addItem("data external", 2);
+                        submenu.addItem("save", 3);
+                        submenu.addItem("apply", 4);
                         let r2 = submenu.show();
                         if (r2 === undefined) {break}
                     
@@ -101,20 +103,35 @@ function main() {
                             } else {usb_nc()}
                         }
                         
-                        else if (r2 === 1) {  //data
+                        else if (r2 === 1) {  //data internal
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
-                                badusb.print('IPADDR=172.18.26.'); badusb.println(keyboard.text(4, ""));
+                                badusb.print('IPADDR=192.168.17.'); badusb.println(keyboard.text(4, ""));
+                                badusb.println('NETMASK=24');
+                                badusb.println('GATEWAY=192.168.17.1');
+                                badusb.print('DNS1=192.168.17.12');
+                                badusb.print('DNS2=8.8.8.8');
+                                
+                                notify.success();
+                            } else {usb_nc()}
+                        }
+                        
+                        else if (r2 === 2) {  //data external
+                            if (badusb.isConnected()) {
+                                notify.blink("green", "short");
+                                
+                                badusb.println('IPADDR=172.18.14.17');
                                 badusb.println('NETMASK=16');
                                 badusb.println('GATEWAY=172.18.0.1');
-                                badusb.print('DNS1=172.18.0.1');
+                                badusb.println('DNS1=172.18.0.12');
+                                badusb.print('DNS2=8.8.8.8');
                                 
                                 notify.success();
                             } else {usb_nc()}
                         }
 
-                        else if (r2 === 2) {  //save
+                        else if (r2 === 3) {  //save
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
@@ -125,7 +142,7 @@ function main() {
                             } else {usb_nc()}
                         }
 
-                        else if (r2 === 3) {  //apply
+                        else if (r2 === 4) {  //apply
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
@@ -227,7 +244,6 @@ function main() {
                                 notify.blink("green", "short");
                                 
                                 badusb.print('sudo vi /etc/ssh/sshd_config');
-                                badusb.press('TAB')
                                 
                                 notify.success();
                             } else {usb_nc()}
@@ -243,11 +259,22 @@ function main() {
                             } else {usb_nc()}
                         }
 
-                        else if (r2 === 1) {  //nano
+                        else if (r2 === 2) {  //save
                             if (badusb.isConnected()) {
                                 notify.blink("green", "short");
                                 
-                                badusb.print('sudo nano /etc/ssh/sshd_config');
+                                badusb.push('ESCAPE');
+                                badusb.println(':wq');
+                                
+                                notify.success();
+                            } else {usb_nc()}
+                        }
+
+                        else if (r2 === 3) {  //apply
+                            if (badusb.isConnected()) {
+                                notify.blink("green", "short");
+                                
+                                badusb.println('sudo systemctl restart sshd');
                                 
                                 notify.success();
                             } else {usb_nc()}
