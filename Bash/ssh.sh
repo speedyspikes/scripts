@@ -70,6 +70,21 @@ add_ssh_keys() {
   # done < "$USER_LIST"
 }
 
+# Function to change passwords for all users
+change_passwords() {
+  read -sp "Enter new password: " new_password
+  echo
+  for user in "${users[@]}"; do
+    if id "$user" &>/dev/null; then
+      echo "$user:$new_password" | sudo chpasswd
+      echo "Password changed for $user"
+    else
+      echo "User $user does not exist"
+      echo "User $user does not exist" >> /var/log/ssh_script.log
+    fi
+  done
+}
+
 users=(
   camille_jenatzy
   gaston_chasseloup
@@ -116,6 +131,8 @@ elif [[ $1 == "e" ]]; then
 elif [[ $1 == "key" ]]; then
   # add_ssh_keys $2 $3
   add_ssh_keys $users $key
+elif [[ $1 == "p" ]]; then
+  change_passwords
 elif [[ $1 == "r"]]; then
   restart_ssh
 elif [[ $1 == "a" ]]; then
@@ -132,6 +149,7 @@ else
   echo "  w     Write/remove immutable attribute from sshd_config"
   echo "  e     Edit sshd_config"
   echo "  key   Add SSH keys to users"
+  echo "  p     Change passwords for all users"
   echo "  r     Restart SSH service"
   echo "  a     Run i, key, r"
   echo "  l     Show log"
