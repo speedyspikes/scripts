@@ -121,6 +121,22 @@ restart_ssh() {
   sudo systemctl restart sshd
 }
 
+# Function to harden SSH configuration
+harden_ssh_config() {
+  sudo sed -i.bak \
+    -e 's/^#*Port.*/Port 22/' \
+    -e 's/^#*PermitRootLogin.*/PermitRootLogin no/' \
+    -e 's/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/' \
+    -e 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' \
+    -e 's/^#*PermitEmptyPasswords.*/PermitEmptyPasswords no/' \
+    -e 's/^#*ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' \
+    -e 's/^#*UsePAM.*/UsePAM yes/' \
+    -e 's/^#*X11Forwarding.*/X11Forwarding no/' \
+    /etc/ssh/sshd_config
+
+  echo "SSH config hardened. Backup saved as /etc/ssh/sshd_config.bak"
+}
+
 # Main script logic
 if [[ $1 == "i" ]]; then
   make_immutable
@@ -135,7 +151,14 @@ elif [[ $1 == "p" ]]; then
   change_passwords
 elif [[ $1 == "r"]]; then
   restart_ssh
+elif [[ $1 == "h" ]]; then
+  remove_immutable
+  harden_ssh_config
+  restart_ssh
+  make_immutable
 elif [[ $1 == "a" ]]; then
+  remove_immutable
+  harden_ssh_config
   make_immutable
   add_ssh_keys $users $key
   restart_ssh
@@ -151,6 +174,7 @@ else
   echo "  key   Add SSH keys to users"
   echo "  p     Change passwords for all users"
   echo "  r     Restart SSH service"
+  echo "  h     Harden SSH config"
   echo "  a     Run i, key, r"
   echo "  l     Show log"
   exit 1

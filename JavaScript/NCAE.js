@@ -20,6 +20,7 @@ function main() {
         submenu.addItem("Passwords", 1);
         submenu.addItem("SSH", 2);
         submenu.addItem("Paste", 3);
+        submenu.addItem("Git Clone", 4);
         let r = submenu.show();
         if (r === undefined) {break}
         
@@ -437,6 +438,17 @@ function main() {
                         badusb.println(file[i], delay);
                     }
                 }
+                
+                notify.success();
+            } else {usb_nc()}
+        }
+        else if (r === 3) {  //Git Clone
+            print("\nBadUSB: Git Clone");
+            if (badusb.isConnected()) {
+                notify.blink("green", "short");
+                print("USB is connected");
+
+                badusb.print('git clone https://github.com/jwood00/Taina-Kniga.git');
                 
                 notify.success();
             } else {usb_nc()}
