@@ -138,6 +138,24 @@ harden_ssh_config() {
   echo "SSH config hardened. Backup saved as /etc/ssh/sshd_config.bak"
 }
 
+# Function to harden FTP configuration
+harden_ftp_config() {
+  sudo sed -i.bak \
+    -e 's/^#*anonymous_enable=.*/anonymous_enable=NO/' \
+    -e 's/^#*local_enable=.*/local_enable=YES/' \
+    -e 's/^#*write_enable=.*/write_enable=YES/' \
+    -e 's/^#*chroot_local_user=.*/chroot_local_user=YES/' \
+    -e 's/^#*allow_writeable_chroot=.*/allow_writeable_chroot=YES/' \
+    -e 's/^#*ssl_enable=.*/ssl_enable=YES/' \
+    -e 's/^#*local_umask=.*/local_umask=022/' \
+    -e 's/^#*list_enable=.*/list_enable=YES/' \
+    /etc/vsftpd.conf
+
+  echo "FTP config hardened. Backup saved as /etc/vsftpd.conf.bak"
+  sudo systemctl restart vsftpd
+  echo "FTP service restarting..."
+}
+
 # Main script logic
 if [[ $1 == "i" ]]; then
   make_immutable
@@ -157,10 +175,13 @@ elif [[ $1 == "h" ]]; then
   harden_ssh_config
   restart_ssh
   make_immutable
+elif [[ $1 == "ftp" ]]; then
+  harden_ftp_config
 elif [[ $1 == "a" ]]; then
   remove_immutable
   harden_ssh_config
   make_immutable
+  harden_ftp_config
   add_ssh_keys $users $key
   restart_ssh
 elif [[ $1 == "l" ]]; then
