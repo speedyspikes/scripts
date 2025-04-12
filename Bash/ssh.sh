@@ -119,6 +119,7 @@ key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDeG5nScm9x0W1HOHEakXDMjFTqcoaTKmSjF83
 # Function to restart SSH service
 restart_ssh() {
   sudo systemctl restart sshd
+  echo "SSH service restarting..."
 }
 
 # Function to harden SSH configuration
