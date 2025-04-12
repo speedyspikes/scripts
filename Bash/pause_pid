@@ -1,0 +1,17 @@
+#!/bin/zsh
+program=$1
+pid=$(ps ax | grep "$program" | grep -Ev "grep|$0" | awk '{print $1}')
+if [ -z "$pid" ]; then
+  echo "No running process found with the name '$program'."
+  exit 1
+fi
+
+# Check if the process is already paused
+stat=$(ps -o state= -p "$pid" | awk '{print $1}')
+if [ "$stat" = "T" ]; then
+  echo "Resuming $program"
+  kill -CONT "$pid"
+else
+  echo "Pausing $program"
+  kill -STOP "$pid"
+fi

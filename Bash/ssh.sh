@@ -114,7 +114,7 @@ users=(
   jessi_combs
   andy_green
 )
-key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcM4aDj8Y4COv+f8bd2WsrIynlbRGgDj2+q9aBeW1Umj5euxnO1vWsjfkpKnyE/ORsI6gkkME9ojAzNAPquWMh2YG+n11FB1iZl2S6yuZB7dkVQZSKpVYwRvZv2RnYDQdcVnX9oWMiGrBWEAi4jxcYykz8nunaO2SxjEwzuKdW8lnnh2BvOO9RkzmSXIIdPYgSf8bFFC7XFMfRrlMXlsxbG3u/NaFjirfvcXKexz06L6qYUzob8IBPsKGaRjO+vEdg6B4lH1lMk1JQ4GtGOJH6zePfB6Gf7rp31261VRfkpbpaDAznTzh7bgpq78E7SenatNbezLDaGq3Zra3j53u7XaSVipkW0S3YcXczhte2J9kvo6u6s094vrcQfB9YigH4KhXpCErFk08NkYAEJDdqFqXIjvzsro+2/EW1KKB9aNPSSM9EZzhYc+cBAl4+ohmEPej1m15vcpw3k+kpo1NC2rwEXIFxmvTme1A2oIZZBpgzUqfmvSPwLXF0EyfN9Lk= SCORING KEY DO NOT REMOVE"
+key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDeG5nScm9x0W1HOHEakXDMjFTqcoaTKmSjF83CACnJgjQxIypJXZ+Ao+MUsyZjBhGsLnsDCwVOBiKhUpExZUhB425QJ+PwVz3qrb8h0tOMPV1m4+CKc/BLgnwx3GtLuJ7Y1Ks7yNBBzL4syhFRAFEzKbn4cHMINV3Z64HXmMi/PFIq97smsIFdgfyza3qyO7w1Age0RjhqyB8w/JWFS7BriU2IbaerRdbRzjCvChqs5BRAxiSyesMRnDwUoqeQA/tVcikZHvR/+VePgs7Jlk4gKuIUAmUeUjw9VzrtVJf9NOkHc6ar5Qif1ewyKp8nmeO3bkHgPme9Q7x9AhWbnMHRnjow8cUL+E+/3gJDHrAZE0bhFwgb8m3N5PBU5h1gNwaxE2x7w2+wqlrTii6/gefEyhsqNw5udHb4ineG0LjCCedKYQzwoF1GahLCz1S8xPY8aZPxy+Wf6RWczjlqZOfFVpSKm5wU2BmfZBmI8jfzGBYOrgaqExVMqLz2v6JEZK0= SCORING KEY DO NOT REMOVE"
 
 # Function to restart SSH service
 restart_ssh() {
@@ -149,7 +149,7 @@ elif [[ $1 == "key" ]]; then
   add_ssh_keys $users $key
 elif [[ $1 == "p" ]]; then
   change_passwords
-elif [[ $1 == "r"]]; then
+elif [[ $1 == "r" ]]; then
   restart_ssh
 elif [[ $1 == "h" ]]; then
   remove_immutable
