@@ -125,14 +125,14 @@ restart_ssh() {
 # Function to harden SSH configuration
 harden_ssh_config() {
   sudo sed -i.bak \
-    -e 's/^#*Port.*/Port 22/' \
-    -e 's/^#*PermitRootLogin.*/PermitRootLogin no/' \
-    -e 's/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/' \
-    -e 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' \
-    -e 's/^#*PermitEmptyPasswords.*/PermitEmptyPasswords no/' \
-    -e 's/^#*ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' \
-    -e 's/^#*UsePAM.*/UsePAM yes/' \
-    -e 's/^#*X11Forwarding.*/X11Forwarding no/' \
+    -e 's/^#*Port.*/Port=22/' \
+    -e 's/^#*PermitRootLogin.*/PermitRootLogin=no/' \
+    -e 's/^#*PubkeyAuthentication.*/PubkeyAuthentication=yes/' \
+    -e 's/^#*PasswordAuthentication.*/PasswordAuthentication=no/' \
+    -e 's/^#*PermitEmptyPasswords.*/PermitEmptyPasswords=no/' \
+    -e 's/^#*ChallengeResponseAuthentication.*/ChallengeResponseAuthentication=no/' \
+    -e 's/^#*UsePAM.*/UsePAM=yes/' \
+    -e 's/^#*X11Forwarding.*/X11Forwarding=no/' \
     /etc/ssh/sshd_config
 
   echo "SSH config hardened. Backup saved as /etc/ssh/sshd_config.bak"
