@@ -1,0 +1,15 @@
+#!/bin/zsh
+pid=$(ps ax | grep Cemu | grep -v grep | awk '{print $1}')
+if [ -z "$pid" ]; then
+  echo "No running process found with the name 'Cemu'."
+  exit 1
+fi
+
+stat=$(ps -o state= -p "$pid" | awk '{print $1}')
+if [ "$stat" = "T" ]; then
+  echo "Resuming Cemu"
+  kill -CONT "$pid"
+else
+  echo "Pausing Cemu"
+  kill -STOP "$pid"
+fi
