@@ -11,9 +11,7 @@
 
 Import-Module ActiveDirectory
 
-# Specify the target Organizational Unit (OU)
-# Define a list of Organizational Units (OUs)
-$ouList = @(
+$ouList = @( # List of Organizational Units (OUs)
     "OU=WorkstationGroup1,OU=Department1,OU=Location1,OU=Computers,DC=example,DC=com",
     "OU=WorkstationGroup2,OU=Department2,OU=Location2,OU=Computers,DC=example,DC=com",
     "OU=WorkstationGroup3,OU=Department3,OU=Location3,OU=Computers,DC=example,DC=com",
