@@ -4,7 +4,7 @@ SendMode('Input')
 SetWorkingDir(A_ScriptDir)
 SetKeyDelay(10)
 
-author := "SpeedySpikes"
+author := "Speedy_Spikes"
 last_updated := "11/3/2025"
 
 year := 2026 ; Change this value to the current year as needed
