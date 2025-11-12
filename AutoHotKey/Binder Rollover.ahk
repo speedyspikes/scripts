@@ -6,10 +6,7 @@ SetWorkingDir(A_ScriptDir)
 ; DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 author := "Speedy_Spikes"
-last_updated := "11/6/2025"
-
-year := 2026 ; Change this value to the current year as needed
-turbo_mode := true ; Set to true to skip confirmation prompts
+last_updated := "11/11/2025"
 
 /*
 This is an AutoHotKey automation. This is not a direct API to anything. It uses
@@ -23,6 +20,9 @@ errors if not used properly. Please follow all instructions carefully.
 ! = Alt
 */
 
+year := 2026 ; Change this value to the current year as needed
+turbo_mode := false ; Set to true to skip confirmation prompts
+
 F8::ExitApp()
 XButton2::Send('{Enter}')
 
@@ -34,8 +34,7 @@ XButton2::Send('{Enter}')
         'Commands:`n'
         'F2 => Save File(s)`n'
         'F3 => Add xxx to Name`n'
-        'F4 => Change Year`n'
-        'F5 => Create Placeholder`n'
+        'F4 => Create Placeholder`n'
         '`nF8 => Quit Script`n'
         'F9 => Window Name`n'
     )
@@ -76,7 +75,8 @@ F9:: { ; Window Name
 
 
 F10:: { ; Test
-    MouseMove(170, 200)
+    input := InputBox("How many files are in the folder?", "File Count")
+    MsgBox(input.Result "`n" input.Value)
 }
 
 
@@ -97,7 +97,11 @@ F2:: { ; Save File(s)
 
 
 F3:: { ; Mark xxx
-    fileCount := InputBox("How many files are in the folder?", "File Count").Value
+    input := InputBox("How many files are in the folder?", "File Count")
+    if (input.Result = "Cancel") {
+        return
+    }
+    fileCount := input.Value
     if (fileCount = "") {
         fileCount := 1
     }
@@ -118,68 +122,80 @@ F3:: { ; Mark xxx
             MvMouse(170, 200) ; Move mouse to folder location
             MouseClick("left")
             Sleep(100)
-            Loop fileCount - 1 {
-                Send('{Up}')
-            }
+            Send('{Left}{Down}')
             Sleep(200)
         }
     }
 }
 
 
-F4:: { ; Change year
-    if WindowCheck("ahk_exe PFXEngagement.exe") = "Abort" {
-        return MsgBox("Automation has been aborted.", "Notice", "T5")
+F4:: { ; Create Placeholder
+    G := Object()
+    aGui := Gui()
+    aGui.Add("Text", "x10 y10", "How many files are in the folder?`n(not including placeholders)")
+    aGui.AddEdit("vfiles x168 y13 w20", 1)
+    aGui.Add("Text", "x10 y45", "How many placeholders are `nalready created?")
+    aGui.AddEdit("vdone x168 y48 w20", 0)
+    aGui.Add("Button", "x142 y80 default", "Submit").OnEvent("Click", (*)=>(G := aGui.Submit()))
+    aGui.OnEvent("Close", (*)=>(G := false, aGui.Destroy()))
+    aGui.Show()
+    WinWaitClose(aGui)
+    if (!G) {
+        return
     }
-    Send('{Alt down}f')
-    Sleep(100)
-    Send('i{Alt up}')
-    Sleep(100)
-    if WindowCheck("Workpaper Properties") = "Abort" {
-        return MsgBox("Automation has been aborted.", "Notice", "T5")
-    }
-    Send('{Tab}')
-    Sleep(100)
-    Send('^c')
-    name := RegExReplace(A_Clipboard, "20\d\d", year) ; Change Year
-    Send(name)
-}
 
-
-F5:: { ; Create Placeholder
-    if WindowCheck("ahk_exe PFXEngagement.exe") = "Abort" {
-        return MsgBox("Automation has been aborted.", "Notice", "T5")
+    Loop (G.files - G.done) {
+        if WindowCheck("ahk_exe PFXEngagement.exe") = "Abort" {
+            return MsgBox("Automation has been aborted.", "Notice", "T5")
+        }
+        ; Open properties to copy name
+        Send('{Alt down}f')
+        Sleep(100)
+        Send('i{Alt up}')
+        if WindowCheck("Workpaper Properties") = "Abort" {
+            return MsgBox("Automation has been aborted.", "Notice", "T5")
+        }
+        Sleep(100)
+        Send('^c')
+        Sleep(200)
+        index := RegExReplace(A_Clipboard, "^x+") ; Remove leading x's
+        Send('{Tab}')
+        Send('^c')
+        Sleep(100)
+        Send('{Escape}')
+        name := RegExReplace(A_Clipboard, "v\d+(?:_\d+)+", "vX_XX") ; Replace version
+        name := RegExReplace(name, "20\d\d", year) ; Change Year
+        Sleep(100)
+        MvMouse(170, 200) ; Move mouse to folder location
+        MouseClick("left")
+        Sleep(200)
+        Send('{Left}{Alt down}f')
+        Sleep(200)
+        Send('n')
+        Sleep(200)
+        Send('l{Alt up}')
+        Sleep(100)
+        if WindowCheck("New Placeholder") = "Abort" {
+            return MsgBox("Automation has been aborted.", "Notice", "T5")
+        }
+        Send(index '{Tab}' name)
+        if (turbo_mode) {
+            Sleep(200)
+            Send('{Enter}')
+        } else {
+            MvMouse(340, 520) ; Move mouse to OK button
+        }
+        WinWaitClose("New Placeholder")
+        if (A_Index < G.files - G.done) {
+            Sleep(200)
+            MvMouse(170, 200) ; Move mouse to folder location
+            MouseClick("left")
+            Sleep(100)
+            Loop (G.done * 2 + A_Index * 2 + 1) {
+                Send('{Down}')
+                Sleep(100)
+            }
+            Sleep(500)
+        }
     }
-    ; Open properties to copy name
-    Send('{Alt down}f')
-    Sleep(100)
-    Send('i{Alt up}')
-    if WindowCheck("Workpaper Properties") = "Abort" {
-        return MsgBox("Automation has been aborted.", "Notice", "T5")
-    }
-    Sleep(100)
-    Send('^c')
-    Sleep(200)
-    index := RegExReplace(A_Clipboard, "^x+") ; Remove leading x's
-    Send('{Tab}')
-    Send('^c')
-    Sleep(100)
-    Send('{Escape}')
-    name := RegExReplace(A_Clipboard, "v\d+(?:_\d+)+", "vX_XX") ; Replace version
-    name := RegExReplace(name, "20\d\d", year) ; Change Year
-    Sleep(100)
-    MvMouse(170, 200) ; Move mouse to folder location
-    MouseClick("left")
-    Sleep(200)
-    Send('{Left}{Alt down}f')
-    Sleep(200)
-    Send('n')
-    Sleep(200)
-    Send('l{Alt up}')
-    Sleep(100)
-    if WindowCheck("New Placeholder") = "Abort" {
-        return MsgBox("Automation has been aborted.", "Notice", "T5")
-    }
-    Send(index '{Tab}' name)
-    MvMouse(340, 520) ; Move mouse to OK button
 }
